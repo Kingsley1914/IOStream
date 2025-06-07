@@ -1,0 +1,10 @@
+Quotations. Each chapter begins with quotations. We hope that you enjoy relating these
+to the chapter material.
+Objectives. The quotes are followed by a list of chapter objectives.
+Illustrations/Figures. Abundant charts, tables, line drawings, programs and program output
+are included. We model the flow of control in control statements with UML activity
+diagrams. UML class diagrams model the fields, constructors and methods of classes. We
+use six major UML diagram types in the optional OOD/UML 2 ATM case study in
+Chapters 12 and 13. Abundant
+Programming Tips. We include programming tips to help you focus on important aspects
+of program development. These tips and practices represent the best we’ve gleaned from a

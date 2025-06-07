@@ -1,26 +1,11 @@
 package org.example;
 
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FilterInputStream;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
-import java.io.PrintStream;
-import java.io.SequenceInputStream;
-import java.io.Serializable;
-import java.io.StreamTokenizer;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+import org.apache.commons.lang3.StringUtils;
 
 public class InputOutputStream {
     private static ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -28,9 +13,9 @@ public class InputOutputStream {
 //        byteArrayInputStream1();
 //        byteArrayInputStream2();
 //        byteArrayInputStream3();
-          fileInputStream1();
-          fileInputStream2();
-          fileInputStream3();
+  //        fileInputStream1();
+    //      fileInputStream2();
+      //    fileInputStream3();
 //        objectInputOutputStream();
 //        pipedInputOutputStream1();
 //        pipedInputOutputStream2();
@@ -38,16 +23,18 @@ public class InputOutputStream {
 //        pipedInputOutputStream4();
 //        sequenceInputStream();
 //        filterInputStream();
-//        printStream1();
+ //         printStream1();
 //        printStream2();
 //        printStream3();
 //        printStream4();
 //        printStream5();
 //        streamTokenizer();
-//        scanner1();
-//        scanner2();
+  //     scanner1();
+//       scanner2();
 //        scanner3();
 //        scanner4();
+ //       PrintStream();
+        createAfile();
     }
 
     private static byte[] bytesSource(){
@@ -96,7 +83,7 @@ public class InputOutputStream {
 
     private static void fileInputStream1() {
         System.out.println("\nfileInputStream1():");
-        String file = classLoader.getResource("hello.txt").getFile();
+        String file = classLoader.getResource("nature-macro-water-rain-wallpaper-preview.jpg").getFile();
         try(FileInputStream fis = new FileInputStream(file)){
             int data;
             while ((data = fis.read()) != -1) {
@@ -156,9 +143,9 @@ public class InputOutputStream {
                      new ObjectInputStream(new FileInputStream(fileName))){
             SomeClass obj = new SomeClass();
 
-            objectOutputStream.writeObject(obj);
 
-            System.out.println(obj);
+
+
 
 
 
@@ -169,7 +156,31 @@ public class InputOutputStream {
         } catch (Exception ex){
             ex.printStackTrace();
         }
+
+
     }
+
+    private static void PrintStream() throws IOException{
+
+        SomeClass obj = new SomeClass();
+
+        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+        ObjectOutputStream objectStream = new ObjectOutputStream(byteStream);
+
+
+        objectStream.writeObject(obj);
+        objectStream.flush();
+        System.out.println();
+        System.out.println("serialaizedClassByte\n");
+
+        byte[] serializedBytes = byteStream.toByteArray();
+        for(byte b : serializedBytes){
+            //System.out.printf("%02X",b);
+            System.out.print((char)b);
+        }
+    }
+
+
 
     private static void pipedInputOutputStream1() throws Exception {
         System.out.println("\npipedInputOutputStream1():");
@@ -280,7 +291,23 @@ public class InputOutputStream {
         try(FileOutputStream  fos = new FileOutputStream(fileName);
             PrintStream ps = new PrintStream(fos)){
             ps.println("Hi there!");
+
         } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        fileInputStream5();
+    }
+
+
+    private static void fileInputStream5() {
+        System.out.println("\nfileInputStream3():");
+        String fileloaded = classLoader.getResource("enugu.txt").getFile();
+        try(FileInputStream is = new FileInputStream(fileloaded);){
+            int data;
+            while ((data = is.read()) != -1) {
+                System.out.print((char)data);   //prints: 72 101 108 108 111 33
+            }
+        } catch (Exception ex){
             ex.printStackTrace();
         }
     }
@@ -359,11 +386,15 @@ public class InputOutputStream {
 
     private static void scanner2() {
         System.out.println("\nscanner2():\n");
-        String file = classLoader.getResource("tokens.txt").getFile();
-        try(Scanner sc = new Scanner(new File(file))){
-            while(sc.hasNextLine()){
-                System.out.println(sc.nextLine());
-            }
+        String file = classLoader.getResource("enugu.txt").getFile();
+        try(Scanner sc = new Scanner(new File(file)).useDelimiter(",")){
+          while(sc.hasNext()) {
+              //     System.out.println(sc.nextLine());
+              String word = sc.next();
+              //if ("Abundant".equals(word)) {
+                  System.out.println(word);
+            //  }
+          }
         } catch (Exception ex){
             ex.printStackTrace();
         }
@@ -394,6 +425,29 @@ public class InputOutputStream {
             e.printStackTrace();
         }
     }
+
+
+
+
+    private static void createAfile(){
+        String filePath = "C:" + File.separator + "dev" +File.separator + "java" +File.separator;
+        String filename = "enugu.txt";
+        try {
+            File myFile = new File(filePath + filename);
+            File Directories = new File(filePath);
+            myFile.delete();
+
+            //boolean dirStatus = Directories.mkdirs();
+            //boolean fileStatus = myFile.createNewFile();
+            //System.out.println("directory creation is :" + dirStatus);
+            //System.out.println("file creation is :" + fileStatus);
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
+
+    }
+
 }
 
 
