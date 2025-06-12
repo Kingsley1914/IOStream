@@ -431,14 +431,30 @@ public class InputOutputStream {
 
     private static void createAfile(){
         String filePath = "C:" + File.separator + "dev" +File.separator + "java" +File.separator;
+        String filePath1 = "C:" + File.separator + "dev" +File.separator + "java" +File.separator;
         String filename = "enugu.txt";
+        String filename2 = "enugu2.txt";
+        String filename3 = "enugu3.txt";
+        String[] dirs = {"C:" + File.separator + "dev" +File.separator + "java" +File.separator, "C:" + File.separator + "dev" +File.separator+"enugu"+File.separator + "java" +File.separator+ "xc7" +File.separator};
         try {
-            File myFile = new File(filePath + filename);
-            File Directories = new File(filePath);
-            myFile.delete();
+            int pathInd = 1;
+            File myFile = new File(dirs[pathInd] + filename);
+            File myFile2 = new File(dirs[pathInd] + filename2);
+            File myFile3 = new File(dirs[pathInd] + filename3);
+            File Directories = new File(dirs[pathInd]);
+            //myFile.delete();
+//            filePath = StringUtils.substringBeforeLast(dirs[pathInd], File.separator);
+//
+//            while (new File(filePath).delete()){
+//                filePath = StringUtils.substringBeforeLast(dirs[pathInd], File.separator);
+//            }
 
-            //boolean dirStatus = Directories.mkdirs();
-            //boolean fileStatus = myFile.createNewFile();
+//            boolean dirStatus = Directories.mkdirs();
+//            boolean fileStatus = myFile.createNewFile();
+//            myFile2.createNewFile();
+//            myFile3.createNewFile();
+            listDirs(Directories);
+
             //System.out.println("directory creation is :" + dirStatus);
             //System.out.println("file creation is :" + fileStatus);
         }catch(Exception e){
@@ -447,6 +463,14 @@ public class InputOutputStream {
         }
 
     }
+    public static void listDirs(File file){
+        String[] result = file.list();
+        assert result != null;
+        for(String i : result){
+            System.out.println(i + " ");
+        }
+    }
+
 
 }
 
